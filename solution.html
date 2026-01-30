@@ -1,22 +1,480 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Angela's Portfolio</title>
+    <meta charset="utf-8" />
+    <title>IPO360: Premium Market Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            800: '#0B1120', // Deepest background
+                            900: '#020617', // Nearly black
+                        },
+                        brand: {
+                            500: '#3B82F6', // Vibrant Blue
+                            600: '#2563EB',
+                        },
+                        profit: '#10B981', // Green
+                        loss: '#EF4444',   // Red
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar for tables */
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        
+        /* Glass Effect */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e2e8f0;
+        }
+    </style>
 </head>
 
-<body>
-  <h1>Angela Yu's Portfolio</h1>
-  <h2>I'm a Web Developer</h2>
-  <hr />
-  <h3><a href="./public/movie-ranking.html">Movie Ranking Project</a></h3>
-  <img src="./assets/images/movie-ranking.png" height="200" alt="movie ranking project preview"/>
-  <h3><a href="./public/birthday-invite.html">Birthday Invite Project</a></h3>
-  <img src="./assets/images/birthday-invite.png" height="200" alt="birthday invite project preview"/>
-  <hr />
-  <a href="./public/about.html">About Me</a>
-  <a href="./public/contact.html">Contact Me</a>
-</body>
+<body class="bg-slate-50 text-slate-800 antialiased">
 
+    <div class="bg-navy-900 text-white text-xs py-2 overflow-hidden border-b border-slate-800 relative z-50">
+        <div class="whitespace-nowrap animate-marquee flex gap-8 px-4">
+            <span class="flex items-center gap-2"><i class="fas fa-circle text-[8px] text-profit animate-pulse"></i> MARKET STATUS: OPEN</span>
+            <span class="text-slate-400">|</span>
+            <span class="flex items-center gap-2 text-profit"><i class="fas fa-caret-up"></i> NIFTY 24,500 (+0.4%)</span>
+            <span class="text-slate-400">|</span>
+            <span class="flex items-center gap-2 text-profit"><i class="fas fa-caret-up"></i> SENSEX 81,200 (+0.35%)</span>
+            <span class="text-slate-400">|</span>
+            <span class="font-bold text-brand-500">IPO WATCH:</span> 7 Active, 3 Upcoming
+        </div>
+    </div>
+
+    <nav class="sticky top-0 z-40 glass-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="https://www.ipo360.in" class="flex items-center gap-3 group">
+                    <img src="https://www.ipo360.in/assets/user/img/logo.png" alt="IPO360" class="h-8 w-auto grayscale group-hover:grayscale-0 transition duration-300">
+                    <div class="flex flex-col">
+                        <span class="font-bold text-lg leading-none tracking-tight text-navy-900">IPO360</span>
+                        <span class="text-[10px] font-medium text-slate-500 tracking-wide uppercase">Financial Terminal</span>
+                    </div>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="#" class="px-4 py-2 text-sm font-semibold text-navy-900 bg-slate-100 rounded-lg">Dashboard</a>
+                    <a href="https://www.ipo360.in/upcoming-ipos" class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-navy-900 hover:bg-slate-50 rounded-lg transition">Upcoming</a>
+                    <a href="https://www.ipo360.in/allocate" class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-navy-900 hover:bg-slate-50 rounded-lg transition">GMP Rates</a>
+                    <a href="https://www.ipo360.in/unlisted" class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-navy-900 hover:bg-slate-50 rounded-lg transition">Pre-IPO</a>
+                </div>
+
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="https://www.ipo360.in/login" class="text-sm font-bold text-navy-900 hover:underline">Log in</a>
+                    <a href="#" class="px-5 py-2.5 text-sm font-bold text-white bg-navy-900 rounded-lg shadow-lg shadow-navy-900/20 hover:bg-navy-800 transition">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-white border-b border-slate-200 pt-12 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-7">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-brand-600 text-xs font-bold uppercase tracking-wider mb-6">
+                        <span class="w-2 h-2 bg-brand-500 rounded-full animate-ping"></span> Live IPO Updates
+                    </div>
+                    <h1 class="text-5xl lg:text-6xl font-extrabold text-navy-900 tracking-tight leading-[1.1] mb-6">
+                        The Intelligent Way to <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-indigo-600">Track Indian IPOs</span>
+                    </h1>
+                    <p class="text-lg text-slate-600 mb-8 max-w-xl leading-relaxed">
+                        Real-time subscription data, live GMP tracking, and instant allotment checks. The only dashboard serious investors need.
+                    </p>
+                    
+                    <div class="relative max-w-lg mb-8">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-slate-400"></i>
+                        </div>
+                        <input type="text" class="block w-full pl-11 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white shadow-sm transition" placeholder="Search by Company (e.g. Tata Tech, LIC)...">
+                        <div class="absolute inset-y-2 right-2">
+                            <button class="px-4 h-full bg-navy-900 text-white text-sm font-bold rounded-lg hover:bg-navy-800 transition">Search</button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-6 text-sm font-medium text-slate-500">
+                        <div class="flex items-center gap-2"><i class="fas fa-check-circle text-profit"></i> 100% Accurate GMP</div>
+                        <div class="flex items-center gap-2"><i class="fas fa-check-circle text-profit"></i> SEBI Registered Data</div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="flex justify-between items-end mb-2">
+                        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider">Top Active IPOs</h3>
+                        <a href="#" class="text-xs font-bold text-brand-600 hover:underline">View All</a>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition group cursor-pointer relative overflow-hidden">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-green-500"></div>
+                        <div class="flex justify-between items-start">
+                            <div class="flex items-center gap-4">
+                                <img src="https://www.ipo360.in/files/companies/1768891158_logo.png" class="w-10 h-10 object-contain p-1 border rounded bg-slate-50">
+                                <div>
+                                    <h4 class="font-bold text-navy-900 group-hover:text-brand-600 transition">Kasturi Metal Composite</h4>
+                                    <p class="text-xs text-slate-500">SME • Manufacturing</p>
+                                </div>
+                            </div>
+                            <span class="px-2 py-1 bg-green-50 text-green-700 text-xs font-bold rounded border border-green-100">OPEN</span>
+                        </div>
+                        <div class="mt-4 flex justify-between text-sm">
+                            <div>
+                                <p class="text-slate-400 text-xs">Price Band</p>
+                                <p class="font-bold text-navy-900">₹61 - ₹64</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-slate-400 text-xs">Close Date</p>
+                                <p class="font-bold text-navy-900">29 Jan</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition group cursor-pointer relative overflow-hidden">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-green-500"></div>
+                        <div class="flex justify-between items-start">
+                            <div class="flex items-center gap-4">
+                                <img src="https://www.ipo360.in/files/companies/1769065931_logo.png" class="w-10 h-10 object-contain p-1 border rounded bg-slate-50">
+                                <div>
+                                    <h4 class="font-bold text-navy-900 group-hover:text-brand-600 transition">Kanishk Aluminium</h4>
+                                    <p class="text-xs text-slate-500">SME • Metal</p>
+                                </div>
+                            </div>
+                            <span class="px-2 py-1 bg-green-50 text-green-700 text-xs font-bold rounded border border-green-100">OPEN</span>
+                        </div>
+                        <div class="mt-4 flex justify-between text-sm">
+                            <div>
+                                <p class="text-slate-400 text-xs">Price Band</p>
+                                <p class="font-bold text-navy-900">₹73</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-slate-400 text-xs">Close Date</p>
+                                <p class="font-bold text-navy-900">30 Jan</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 border-dashed hover:bg-white hover:border-solid hover:shadow-sm transition cursor-pointer group">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded bg-blue-100 flex items-center justify-center text-brand-600">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-navy-900">Biopol Chemicals</h4>
+                                    <p class="text-xs text-slate-500">Opening 06 Feb</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right text-slate-300 group-hover:text-brand-600"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-10 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="https://www.ipo360.in/allocate" class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm hover:-translate-y-1 transition hover:border-brand-500 group">
+                    <i class="fas fa-check-circle text-2xl text-slate-300 group-hover:text-brand-500 mb-2 transition"></i>
+                    <h3 class="font-bold text-navy-900">Allotment Status</h3>
+                    <p class="text-xs text-slate-500">Check application status</p>
+                </a>
+                <a href="#" class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm hover:-translate-y-1 transition hover:border-green-500 group">
+                    <i class="fas fa-chart-line text-2xl text-slate-300 group-hover:text-green-500 mb-2 transition"></i>
+                    <h3 class="font-bold text-navy-900">Live GMP</h3>
+                    <p class="text-xs text-slate-500">Track grey market rates</p>
+                </a>
+                <a href="#" class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm hover:-translate-y-1 transition hover:border-purple-500 group">
+                    <i class="fas fa-calculator text-2xl text-slate-300 group-hover:text-purple-500 mb-2 transition"></i>
+                    <h3 class="font-bold text-navy-900">Subscription</h3>
+                    <p class="text-xs text-slate-500">Live bidding data</p>
+                </a>
+                <a href="https://www.ipo360.in/unlisted" class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm hover:-translate-y-1 transition hover:border-orange-500 group">
+                    <i class="fas fa-lock text-2xl text-slate-300 group-hover:text-orange-500 mb-2 transition"></i>
+                    <h3 class="font-bold text-navy-900">Pre-IPO Shares</h3>
+                    <p class="text-xs text-slate-500">Buy unlisted stocks</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+                <h2 class="text-2xl font-extrabold text-navy-900">IPO Calendar</h2>
+                
+                <div class="bg-white p-1 rounded-lg border border-slate-200 shadow-sm flex gap-1">
+                    <button class="px-4 py-1.5 text-sm font-bold text-white bg-navy-900 rounded-md shadow">All</button>
+                    <button class="px-4 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-md transition">Mainboard</button>
+                    <button class="px-4 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-md transition">SME</button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-soft border border-slate-200 overflow-hidden">
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-50 text-slate-500 font-semibold uppercase text-xs border-b border-slate-200">
+                            <tr>
+                                <th class="px-6 py-4">Company</th>
+                                <th class="px-6 py-4">Status</th>
+                                <th class="px-6 py-4">Open Date</th>
+                                <th class="px-6 py-4">Close Date</th>
+                                <th class="px-6 py-4">Issue Size</th>
+                                <th class="px-6 py-4">Price Band</th>
+                                <th class="px-6 py-4 text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            
+                            <tr class="hover:bg-blue-50/50 transition group">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center text-slate-400 font-bold text-xs">M</div>
+                                        <div>
+                                            <a href="https://www.ipo360.in/company/msafe-equipments-limited-ipo" class="font-bold text-navy-900 group-hover:text-brand-600">Msafe Equipments</a>
+                                            <span class="ml-2 px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-500 border border-slate-200">SME</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 border border-green-200">
+                                        <span class="relative flex h-2 w-2">
+                                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                        </span>
+                                        Open
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-slate-600 font-medium">28 Jan</td>
+                                <td class="px-6 py-4 text-slate-600 font-medium">30 Jan</td>
+                                <td class="px-6 py-4 text-slate-900 font-bold">₹66.42 Cr</td>
+                                <td class="px-6 py-4 text-slate-600">₹116 - ₹123</td>
+                                <td class="px-6 py-4 text-right">
+                                    <a href="https://www.ipo360.in/company/msafe-equipments-limited-ipo" class="text-xs font-bold text-white bg-brand-600 px-3 py-1.5 rounded hover:bg-brand-700 transition shadow-sm">View Details</a>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-blue-50/50 transition group">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center text-slate-400 font-bold text-xs">K</div>
+                                        <div>
+                                            <a href="https://www.ipo360.in/company/kasturi-metal-composite-limited-ipo" class="font-bold text-navy-900 group-hover:text-brand-600">Kasturi Metal</a>
+                                            <span class="ml-2 px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-500 border border-slate-200">SME</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 border border-green-200">
+                                        <span class="relative flex h-2 w-2">
+                                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                        </span>
+                                        Open
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-slate-600 font-medium">27 Jan</td>
+                                <td class="px-6 py-4 text-slate-600 font-medium">29 Jan</td>
+                                <td class="px-6 py-4 text-slate-900 font-bold">₹17.61 Cr</td>
+                                <td class="px-6 py-4 text-slate-600">₹61 - ₹64</td>
+                                <td class="px-6 py-4 text-right">
+                                    <a href="https://www.ipo360.in/company/kasturi-metal-composite-limited-ipo" class="text-xs font-bold text-white bg-brand-600 px-3 py-1.5 rounded hover:bg-brand-700 transition shadow-sm">View Details</a>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-slate-50 transition group">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center text-slate-400 font-bold text-xs">C</div>
+                                        <div>
+                                            <a href="https://www.ipo360.in/company/c-k-k-retail-mart-limited-ipo" class="font-bold text-navy-900 group-hover:text-brand-600">C K K Retail Mart</a>
+                                            <span class="ml-2 px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-500 border border-slate-200">SME</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-100">
+                                        <i class="far fa-clock mr-1"></i> Upcoming
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-slate-600 font-medium">30 Jan</td>
+                                <td class="px-6 py-4 text-slate-600 font-medium">03 Feb</td>
+                                <td class="px-6 py-4 text-slate-900 font-bold">₹88.02 Cr</td>
+                                <td class="px-6 py-4 text-slate-600">₹155 - ₹163</td>
+                                <td class="px-6 py-4 text-right">
+                                    <a href="#" class="text-xs font-bold text-slate-500 hover:text-navy-900 border border-slate-300 px-3 py-1.5 rounded hover:bg-slate-50 transition">Notify</a>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-slate-50 transition group">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center text-slate-400 font-bold text-xs">B</div>
+                                        <div>
+                                            <a href="https://www.ipo360.in/company/biopol-chemicals-limited-ipo" class="font-bold text-navy-900 group-hover:text-brand-600">Biopol Chemicals</a>
+                                            <span class="ml-2 px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-500 border border-slate-200">SME</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-100">
+                                        <i class="far fa-clock mr-1"></i> Upcoming
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-slate-600 font-medium">06 Feb</td>
+                                <td class="px-6 py-4 text-slate-600 font-medium">10 Feb</td>
+                                <td class="px-6 py-4 text-slate-900 font-bold">₹31.26 Cr</td>
+                                <td class="px-6 py-4 text-slate-600">₹102 - ₹108</td>
+                                <td class="px-6 py-4 text-right">
+                                    <a href="#" class="text-xs font-bold text-slate-500 hover:text-navy-900 border border-slate-300 px-3 py-1.5 rounded hover:bg-slate-50 transition">Notify</a>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-slate-50 transition group opacity-75">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center text-slate-400 font-bold text-xs">S</div>
+                                        <div>
+                                            <a href="https://www.ipo360.in/company/shadowfax-technologies-limited-ipo" class="font-bold text-slate-700 group-hover:text-brand-600">Shadowfax Technologies</a>
+                                            <span class="ml-2 px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-500 border border-slate-200">MB</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500 border border-slate-200">
+                                        Closed
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-slate-500">20 Jan</td>
+                                <td class="px-6 py-4 text-slate-500">22 Jan</td>
+                                <td class="px-6 py-4 text-slate-700 font-medium">₹1,907 Cr</td>
+                                <td class="px-6 py-4 text-slate-500">₹118 - ₹124</td>
+                                <td class="px-6 py-4 text-right">
+                                    <a href="#" class="text-xs font-bold text-brand-600 hover:underline">Check Allotment</a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <a href="https://www.ipo360.in/ipo" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-slate-200 text-sm font-bold text-navy-900 shadow-sm hover:bg-slate-50 transition">
+                    View Full Calendar <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl font-extrabold text-navy-900 text-center mb-10">Common Questions</h2>
+            
+            <div class="space-y-4">
+                <details class="group bg-slate-50 p-5 rounded-xl border border-slate-100">
+                    <summary class="flex justify-between items-center font-bold text-navy-900 list-none cursor-pointer">
+                        <span>What is Grey Market Premium (GMP)?</span>
+                        <span class="transition group-open:rotate-180 text-brand-600"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="text-slate-600 text-sm mt-3 leading-relaxed">
+                        The Grey Market Premium (GMP) is the unofficial price at which an IPO trades in the grey market before listing. It indicates potential listing performance; a positive GMP suggests a profitable debut.
+                    </div>
+                </details>
+
+                <details class="group bg-slate-50 p-5 rounded-xl border border-slate-100">
+                    <summary class="flex justify-between items-center font-bold text-navy-900 list-none cursor-pointer">
+                        <span>How can I increase my allotment chances?</span>
+                        <span class="transition group-open:rotate-180 text-brand-600"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="text-slate-600 text-sm mt-3 leading-relaxed">
+                        To increase your chances, apply from multiple Demat accounts of family members, bid at the upper price band, and ensure sufficient funds in your bank account.
+                    </div>
+                </details>
+
+                <details class="group bg-slate-50 p-5 rounded-xl border border-slate-100">
+                    <summary class="flex justify-between items-center font-bold text-navy-900 list-none cursor-pointer">
+                        <span>Can I cancel my IPO application?</span>
+                        <span class="transition group-open:rotate-180 text-brand-600"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="text-slate-600 text-sm mt-3 leading-relaxed">
+                        Retail investors can cancel applications while the IPO is open. NII and QIB applications typically cannot be cancelled once submitted.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-navy-900 text-slate-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="font-bold text-xl text-white tracking-tight">IPO360</span>
+                    </div>
+                    <p class="text-sm leading-relaxed max-w-sm mb-6">
+                        India's #1 platform for tracking Mainboard and SME IPOs. We provide accurate GMP, Live Subscription numbers, and Financial Analysis to help you invest smarter.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-8 h-8 flex items-center justify-center rounded bg-slate-800 hover:bg-brand-600 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-8 h-8 flex items-center justify-center rounded bg-slate-800 hover:bg-brand-600 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-8 h-8 flex items-center justify-center rounded bg-slate-800 hover:bg-brand-600 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Market Data</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Upcoming IPOs</a></li>
+                        <li><a href="#" class="hover:text-white transition">Live GMP Rates</a></li>
+                        <li><a href="#" class="hover:text-white transition">SME Dashboard</a></li>
+                        <li><a href="#" class="hover:text-white transition">Allotment Status</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Advertise</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 pt-8 text-center text-xs text-slate-500">
+                &copy; 2026 IPO360. All rights reserved. Data provided is for informational purposes only.
+            </div>
+        </div>
+    </footer>
+
+</body>
 </html>
